@@ -1,0 +1,10 @@
+{
+  "java.project.resourceFilters": [
+    "node_modules",
+    "\\.git",
+    "a_khmelev",
+    "group(?!310901$)\\d+",
+    "(?!^(baradzin|src|by|it)$)[a-zA-Z]+"
+  ],
+  "java.project.referencedLibraries": ["init.jar"]
+}
