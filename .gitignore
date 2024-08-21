@@ -22,16 +22,15 @@ bin/
 /nbdist/
 /.nb-gradle/
 
-### VS Code ###
-.vscode/
-
 ### Mac OS ###
 .DS_Store
+
+### NixOS ###
+.direnv/
 
 ### PRJ ###
 
 .idea
-.vscode
 target
 out
 
