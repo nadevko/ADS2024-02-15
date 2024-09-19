@@ -8,12 +8,21 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * <p>Построить max-кучу = пирамиду = бинарное сбалансированное дерево на массиве</p>
- * <p>ВАЖНО! НЕЛЬЗЯ ИСПОЛЬЗОВАТЬ НИКАКИЕ КОЛЛЕКЦИИ, КРОМЕ ARRAYLIST (его можно, но только для массива)</p>
- * <p>Проверка проводится по данным файла. Первая строка входа содержит число операций 1 ≤ n ≤ 100000. Каждая из
- * последующих nn строк задают операцию одного из следующих двух типов:</p>
+ * <p>
+ * Построить max-кучу = пирамиду = бинарное сбалансированное дерево на массиве
+ * </p>
+ * <p>
+ * ВАЖНО! НЕЛЬЗЯ ИСПОЛЬЗОВАТЬ НИКАКИЕ КОЛЛЕКЦИИ, КРОМЕ ARRAYLIST (его можно, но
+ * только для массива)
+ * </p>
+ * <p>
+ * Проверка проводится по данным файла. Первая строка входа содержит число
+ * операций 1 ≤ n ≤ 100000. Каждая из
+ * последующих nn строк задают операцию одного из следующих двух типов:
+ * </p>
  * <ul>
- * <li>Insert x, где 0 ≤ x ≤ 1000000000 — целое число. Добавляет число x в очередь с приоритетами</li>
+ * <li>Insert x, где 0 ≤ x ≤ 1000000000 — целое число. Добавляет число x в
+ * очередь с приоритетами</li>
  * <li>ExtractMax. Извлекает максимальное число и выводит его</li>
  * </ul>
  * <p>
@@ -29,12 +38,17 @@ import java.util.Scanner;
  * 200<br/>
  * 500<br/>
  * </p>
- * <p>РЕМАРКА</p>
- * <p>Это задание исключительно учебное. Свои собственные кучи нужны довольно редко. "В реальном бою" все существенно
- * иначе. Изучите и используйте коллекции TreeSet, TreeMap, PriorityQueue и т.д. с нужным CompareTo() для объекта
- * внутри.</p>
+ * <p>
+ * РЕМАРКА
+ * </p>
+ * <p>
+ * Это задание исключительно учебное. Свои собственные кучи нужны довольно
+ * редко. "В реальном бою" все существенно
+ * иначе. Изучите и используйте коллекции TreeSet, TreeMap, PriorityQueue и т.д.
+ * с нужным CompareTo() для объекта
+ * внутри.
+ * </p>
  */
-
 public class C_HeapMax {
 
     public static void main(String[] args) throws FileNotFoundException {
@@ -50,21 +64,26 @@ public class C_HeapMax {
     Long findMaxValue(InputStream stream) {
         var maxValue = 0L;
         var heap = new MaxHeap();
-        var scanner = new Scanner(stream);
-        var count = scanner.nextInt();
-        for (var i = 0; i < count; ) {
-            var s = scanner.nextLine();
-            if (s.equalsIgnoreCase("extractMax")) {
-                var res = heap.extractMax();
-                if (res != null && res > maxValue) maxValue = res;
-                System.out.println();
-                i++;
+        try (var scanner = new Scanner(stream)) {
+            var count = scanner.nextInt();
+            for (var i = 0; i < count;) {
+                var s = scanner.nextLine();
+                if (s.equalsIgnoreCase("extractMax")) {
+                    var res = heap.extractMax();
+                    if (res != null && res > maxValue)
+                        maxValue = res;
+                    System.out.println();
+                    i++;
+                }
+                if (s.contains(" ")) {
+                    var p = s.split(" ");
+                    if (p[0].equalsIgnoreCase("insert"))
+                        heap.insert(Long.parseLong(p[1]));
+                    i++;
+                }
             }
-            if (s.contains(" ")) {
-                var p = s.split(" ");
-                if (p[0].equalsIgnoreCase("insert")) heap.insert(Long.parseLong(p[1]));
-                i++;
-            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
         return maxValue;
     }
@@ -95,8 +114,8 @@ public class C_HeapMax {
             var child = (heap.size() > right && heap.get(right) > heap.get(parent))
                     ? right
                     : (heap.size() > left && heap.get(left) > heap.get(parent))
-                    ? left
-                    : parent;
+                            ? left
+                            : parent;
 
             if (parent != child) {
                 swap(parent, child);

@@ -6,22 +6,33 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 /**
- * <p>Задача на программирование: наибольшая невозрастающая подпоследовательность</p>
- * <p>Дано:</p>
+ * <p>
+ * Задача на программирование: наибольшая невозрастающая подпоследовательность
+ * </p>
+ * <p>
+ * Дано:
+ * </p>
  * <ul>
  * <li>целое число 1<=n<=1E5 ( ОБРАТИТЕ ВНИМАНИЕ НА РАЗМЕРНОСТЬ! )</li>
  * <li>массив A[1…n] натуральных чисел, не превосходящих 2E9.</li>
  * </ul>
- * <p>Необходимо:</p>
+ * <p>
+ * Необходимо:
+ * </p>
  * <ul>
- * <li>Выведите максимальное 1<=k<=n, для которого гарантированно найдётся подпоследовательность индексов
- * i[1]<i[2]<…<i[k] <= длины k, для которой каждый элемент A[i[k]] не больше любого предыдущего т.е. для всех 1<=j<k,
+ * <li>Выведите максимальное 1<=k<=n, для которого гарантированно найдётся
+ * подпоследовательность индексов
+ * i[1]<i[2]<…<i[k] <= длины k, для которой каждый элемент A[i[k]] не больше
+ * любого предыдущего т.е. для всех 1<=j<k,
  * A[i[j]]>=A[i[j+1]].</li>
- * <li>В первой строке выведите её длину k, во второй - её индексы i[1]<i[2]<…<i[k] соблюдая A[i[1]]>=A[i[2]]>= ...
+ * <li>В первой строке выведите её длину k, во второй - её индексы
+ * i[1]<i[2]<…<i[k] соблюдая A[i[1]]>=A[i[2]]>= ...
  * >=A[i[n]].</li>
  * <li>(индекс начинается с 1)</li>
  * </ul>
- * <p>Решить задачу МЕТОДАМИ ДИНАМИЧЕСКОГО ПРОГРАММИРОВАНИЯ</p>
+ * <p>
+ * Решить задачу МЕТОДАМИ ДИНАМИЧЕСКОГО ПРОГРАММИРОВАНИЯ
+ * </p>
  * <p>
  * Sample Input:<br/>
  * 5<br/>
@@ -31,14 +42,14 @@ import java.util.Scanner;
  * 1 3 4 5<br/>
  * </p>
  */
-
 public class C_LongNotUpSubSeq {
     int getNotUpSeqSize(InputStream stream) {
-        var scanner = new Scanner(stream);
-        var m = new Integer[scanner.nextInt()];
-        for (var i = 0; i < m.length; i++)
-            m[i] = scanner.nextInt();
-        return new SeqCheck((arr, current, next) -> arr[current] >= arr[next]).getLength(m);
+        try (var scanner = new Scanner(stream)) {
+            var m = new Integer[scanner.nextInt()];
+            for (var i = 0; i < m.length; i++)
+                m[i] = scanner.nextInt();
+            return new SeqCheck((arr, current, next) -> arr[current] >= arr[next]).getLength(m);
+        }
     }
 
     public static void main(String[] args) throws FileNotFoundException {

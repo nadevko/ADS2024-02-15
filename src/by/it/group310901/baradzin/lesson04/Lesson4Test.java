@@ -15,9 +15,9 @@ public class Lesson4Test {
         var root = System.getProperty("user.dir") + "/src/";
         InputStream stream = new FileInputStream(root + "by/it/group310901/baradzin/lesson04/dataA.txt");
         var instance = new A_BinaryFind();
-//        var startTime = System.currentTimeMillis();
+        // var startTime = System.currentTimeMillis();
         var result = instance.findIndex(stream);
-//        var finishTime = System.currentTimeMillis();
+        // var finishTime = System.currentTimeMillis();
         var sb = new StringBuilder();
         for (var index : result) {
             sb.append(index).append(" ");
@@ -31,9 +31,9 @@ public class Lesson4Test {
         var root = System.getProperty("user.dir") + "/src/";
         InputStream stream = new FileInputStream(root + "by/it/group310901/baradzin/lesson04/dataB.txt");
         var instance = new B_MergeSort();
-//        var startTime = System.currentTimeMillis();
+        // var startTime = System.currentTimeMillis();
         var result = instance.getMergeSort(stream);
-//        var finishTime = System.currentTimeMillis();
+        // var finishTime = System.currentTimeMillis();
         var ok = result.length > 3;
         var test = new int[result.length];
         System.arraycopy(result, 0, test, 0, result.length);
@@ -48,9 +48,9 @@ public class Lesson4Test {
         var root = System.getProperty("user.dir") + "/src/";
         InputStream stream = new FileInputStream(root + "by/it/group310901/baradzin/lesson04/dataC.txt");
         var instance = new C_GetInversions();
-//        var startTime = System.currentTimeMillis();
+        // var startTime = System.currentTimeMillis();
         var result = instance.calc(stream);
-//        var finishTime = System.currentTimeMillis();
+        // var finishTime = System.currentTimeMillis();
         var ok = (2 == result);
         assertTrue("C failed", ok);
     }

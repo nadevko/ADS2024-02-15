@@ -3,17 +3,17 @@ package by.it.group310901.baradzin.lesson02;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 /*
     Даны интервальные события events
     реализуйте метод calcStartTimes, так, чтобы число принятых к выполнению
     непересекающихся событий было максимально.
     Алгоритм жадный. Для реализации обдумайте надежный шаг.
 */
-
 public class B_Sheduler {
     public static void main(String[] args) {
         var instance = new B_Sheduler();
-        var events = new Event[]{
+        var events = new Event[] {
                 new Event(0, 3), new Event(0, 1), new Event(1, 2),
                 new Event(3, 5), new Event(1, 3), new Event(1, 3),
                 new Event(1, 3), new Event(3, 6), new Event(2, 7),
@@ -35,15 +35,15 @@ public class B_Sheduler {
      * @param from   начало периода (включительно)
      * @param to     конец периода (включительно)
      * @return итог
-     * @implNote Оптимизация проводится по наибольшему числу непересекающихся событий, начало и конец событий могут
-     * совпадать
+     * @implNote Оптимизация проводится по наибольшему числу непересекающихся
+     *           событий, начало и конец событий могут
+     *           совпадать
      */
     List<Event> calcStartTimes(Event[] events, int from, int to) {
         var result = new ArrayList<Event>();
         Arrays.sort(events, (e1, e2) -> e1.start == e2.start
                 ? Integer.compare(e1.stop, e2.stop)
-                : Integer.compare(e1.start, e2.start)
-        );
+                : Integer.compare(e1.start, e2.start));
         var context = new Object() {
             int time = from;
         };

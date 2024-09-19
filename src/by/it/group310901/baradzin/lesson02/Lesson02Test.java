@@ -11,7 +11,7 @@ public class Lesson02Test {
     @Test(timeout = 2000)
     public void A_VideoRegistrator() {
         var instance = new A_VideoRegistrator();
-        var events = new double[]{1, 1.1, 1.6, 2.2, 2.4, 2.7, 3.9, 8.1, 9.1, 5.5, 3.7};
+        var events = new double[] { 1, 1.1, 1.6, 2.2, 2.4, 2.7, 3.9, 8.1, 9.1, 5.5, 3.7 };
         // рассчитаем моменты старта, с длиной сеанса 1
         var starts = instance.calcStartTimes(events, 1);
         var ok = starts.toString().equals("[1.0, 2.2, 3.7, 5.5, 8.1]");
@@ -21,7 +21,7 @@ public class Lesson02Test {
     @Test(timeout = 2000)
     public void B_Sheduler() {
         var instance = new B_Sheduler();
-        var events = new B_Sheduler.Event[]{
+        var events = new B_Sheduler.Event[] {
                 new B_Sheduler.Event(0, 3), new B_Sheduler.Event(0, 1),
                 new B_Sheduler.Event(1, 2), new B_Sheduler.Event(3, 5),
                 new B_Sheduler.Event(1, 3), new B_Sheduler.Event(1, 3),

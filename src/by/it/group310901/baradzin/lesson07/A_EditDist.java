@@ -7,13 +7,16 @@ import java.util.stream.Stream;
 /**
  * <dl>
  * <dt>Задача на программирование: расстояние Левенштейна</dt>
- * <dd><a href="https://ru.wikipedia.org/wiki/Расстояние_Левенштейна">Википедия</a></dd>
+ * <dd><a href=
+ * "https://ru.wikipedia.org/wiki/Расстояние_Левенштейна">Википедия</a></dd>
  * <dd><a href="http://planetcalc.ru/1721/">planetcalc.ru</a></dd>
  * <dt>Дано:</dt>
- * <dd>Две данных непустые строки длины не более 100, содержащие строчные буквы латинского алфавита.</dd>
+ * <dd>Две данных непустые строки длины не более 100, содержащие строчные буквы
+ * латинского алфавита.</dd>
  * <dt>Необходимо:</dt>
  * <dd>Решить задачу МЕТОДАМИ ДИНАМИЧЕСКОГО ПРОГРАММИРОВАНИЯ</dd>
- * <dd>Рекурсивно вычислить расстояние редактирования двух данных непустых строк</dd>
+ * <dd>Рекурсивно вычислить расстояние редактирования двух данных непустых
+ * строк</dd>
  * </dl>
  * <p>
  * Sample Input 1:<br/>
@@ -44,9 +47,10 @@ public class A_EditDist {
         var stream = A_EditDist.class.getResourceAsStream("dataABC.txt");
         assert stream != null;
         var instance = new A_EditDist();
-        var scanner = new Scanner(stream);
-        for (var i = 0; i < 3; i++)
-            System.out.println(instance.getDistanceEditing(scanner.nextLine(), scanner.nextLine()));
+        try (var scanner = new Scanner(stream)) {
+            for (var i = 0; i < 3; i++)
+                System.out.println(instance.getDistanceEditing(scanner.nextLine(), scanner.nextLine()));
+        }
     }
 
     int getDistanceEditing(String one, String two) {
@@ -58,10 +62,10 @@ public class A_EditDist {
     int getDistanceEditing(int i, int j) {
         return i == 0 ? j
                 : j == 0 ? i
-                : Stream.of(
-                getDistanceEditing(i, j - 1) + 1,
-                getDistanceEditing(i - 1, j) + 1,
-                getDistanceEditing(i - 1, j - 1) + (one.charAt(i - 1) == two.charAt(j - 1) ? 0 : 1)
-        ).min(Integer::compare).get();
+                        : Stream.of(
+                                getDistanceEditing(i, j - 1) + 1,
+                                getDistanceEditing(i - 1, j) + 1,
+                                getDistanceEditing(i - 1, j - 1) + (one.charAt(i - 1) == two.charAt(j - 1) ? 0 : 1))
+                                .min(Integer::compare).get();
     }
 }

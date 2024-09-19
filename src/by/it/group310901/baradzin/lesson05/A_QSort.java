@@ -6,21 +6,41 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 /**
- * <p>Видеорегистраторы и площадь.</p>
- * <p>На площади установлена одна или несколько камер.</p>
- * <p>Известны данные о том, когда каждая из них включалась и выключалась (отрезки работы). Известен список событий
- * на площади (время начала каждого события). Вам необходимо определить для каждого события сколько камер его
- * записали.</p>
- * <p>В первой строке задано два целых числа:</p>
+ * <p>
+ * Видеорегистраторы и площадь.
+ * </p>
+ * <p>
+ * На площади установлена одна или несколько камер.
+ * </p>
+ * <p>
+ * Известны данные о том, когда каждая из них включалась и выключалась (отрезки
+ * работы). Известен список событий
+ * на площади (время начала каждого события). Вам необходимо определить для
+ * каждого события сколько камер его
+ * записали.
+ * </p>
+ * <p>
+ * В первой строке задано два целых числа:
+ * </p>
  * <ol>
  * <li>число включений камер (отрезки) 1<=n<=50000;</li>
  * <li>число событий (точки) 1<=m<=50000.</li>
  * </ol>
- * <p>Следующие n строк содержат по два целых числа ai и bi (ai<=bi) - координаты концов отрезков (время работы одной
- * какой-то камеры). Последняя строка содержит m целых чисел - координаты точек. Все координаты не превышают 10E8 по
- * модулю (!).</p>
- * <p>Точка считается принадлежащей отрезку, если она находится внутри него или на границе.</p>
- * <p>Для каждой точки в порядке их появления во вводе выведите, скольким отрезкам она принадлежит.</p>
+ * <p>
+ * Следующие n строк содержат по два целых числа ai и bi (ai<=bi) - координаты
+ * концов отрезков (время работы одной
+ * какой-то камеры). Последняя строка содержит m целых чисел - координаты точек.
+ * Все координаты не превышают 10E8 по
+ * модулю (!).
+ * </p>
+ * <p>
+ * Точка считается принадлежащей отрезку, если она находится внутри него или на
+ * границе.
+ * </p>
+ * <p>
+ * Для каждой точки в порядке их появления во вводе выведите, скольким отрезкам
+ * она принадлежит.
+ * </p>
  * <p>
  * Sample Input:<br/>
  * 2 3<br/>
@@ -31,7 +51,6 @@ import java.util.Scanner;
  * 1 0 0<br/>
  * </p>
  */
-
 public class A_QSort {
     public static void main(String[] args) throws FileNotFoundException {
         var root = System.getProperty("user.dir") + "/src/";
@@ -46,20 +65,21 @@ public class A_QSort {
      * Тут реализуйте логику задачи с применением быстрой сортировки
      */
     int[] getAccessory(InputStream stream) {
-        var scanner = new Scanner(stream);
-        var segments = new Segment[scanner.nextInt()];
-        var points = new int[scanner.nextInt()];
-        var result = new int[points.length];
-        for (var i = 0; i < segments.length; i++)
-            segments[i] = new Segment(scanner.nextInt(), scanner.nextInt());
-        for (var i = 0; i < points.length; i++)
-            points[i] = scanner.nextInt();
-        qsort(segments);
-        for (var i = 0; i < points.length; i++)
-            for (var j = 0; j < segments.length && points[i] >= segments[j].start; j++)
-                if (points[i] <= segments[j].stop)
-                    result[i]++;
-        return result;
+        try (var scanner = new Scanner(stream)) {
+            var segments = new Segment[scanner.nextInt()];
+            var points = new int[scanner.nextInt()];
+            var result = new int[points.length];
+            for (var i = 0; i < segments.length; i++)
+                segments[i] = new Segment(scanner.nextInt(), scanner.nextInt());
+            for (var i = 0; i < points.length; i++)
+                points[i] = scanner.nextInt();
+            qsort(segments);
+            for (var i = 0; i < points.length; i++)
+                for (var j = 0; j < segments.length && points[i] >= segments[j].start; j++)
+                    if (points[i] <= segments[j].stop)
+                        result[i]++;
+            return result;
+        }
     }
 
     <T extends Comparable<T>> void qsort(T[] arr) {
@@ -67,7 +87,8 @@ public class A_QSort {
     }
 
     <T extends Comparable<T>> void qsort(T[] arr, int left, int right) {
-        if (left >= right) return;
+        if (left >= right)
+            return;
         var pivot = lomuto(arr, left, right);
         qsort(arr, left, pivot - 1);
         qsort(arr, pivot + 1, right);

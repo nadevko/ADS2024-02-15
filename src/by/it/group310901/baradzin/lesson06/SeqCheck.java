@@ -16,7 +16,8 @@ class SeqCheck {
     }
 
     int getLength(Integer[] arr, int current, int next) {
-        if (next == arr.length) return 0;
+        if (next == arr.length)
+            return 0;
         var includes = 0;
         if (current == -1 || checker.apply(arr, current, next))
             includes = 1 + getLength(arr, next, next + 1);

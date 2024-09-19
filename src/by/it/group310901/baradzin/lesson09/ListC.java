@@ -149,8 +149,6 @@ public class ListC<E> implements List<E> {
         return -1;
     }
 
-    ///////
-
     @Override
     public boolean containsAll(Collection<?> collection) {
         for (Object elem : collection)

@@ -3,10 +3,10 @@ package by.it.group310901.baradzin.lesson01;
 import java.math.BigInteger;
 
 /**
- * Вам необходимо выполнить способ вычисления чисел Фибоначчи с вспомогательным массивом без ограничений на размер
+ * Вам необходимо выполнить способ вычисления чисел Фибоначчи с вспомогательным
+ * массивом без ограничений на размер
  * результата (BigInteger)
  */
-
 public class FiboB {
     private final long startTime = System.currentTimeMillis();
 

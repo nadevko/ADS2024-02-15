@@ -7,20 +7,30 @@ import java.util.AbstractMap;
 import java.util.Scanner;
 
 /**
- * <p>Видеорегистраторы и площадь 2.</p>
- * <p>Условие то же что и в задаче А.</p>
- * <p>По сравнению с задачей A доработайте алгоритм так, чтобы</p>
+ * <p>
+ * Видеорегистраторы и площадь 2.
+ * </p>
+ * <p>
+ * Условие то же что и в задаче А.
+ * </p>
+ * <p>
+ * По сравнению с задачей A доработайте алгоритм так, чтобы
+ * </p>
  * <ol>
  * <li>
- * <p>он оптимально использовал время и память</p>
+ * <p>
+ * он оптимально использовал время и память
+ * </p>
  * <ul>
  * <li>за стек отвечает элиминация хвостовой рекурсии,</li>
  * <li>за сам массив отрезков - сортировка на месте</li>
  * <li>рекурсивные вызовы должны проводиться на основе 3-разбиения</li>
  * </ul>
  * </li>
- * <li>при поиске подходящих отрезков для точки реализуйте метод бинарного поиска для первого отрезка решения, а
- * затем найдите оставшуюся часть решения (т.е. отрезков, подходящих для точки, может быть много)</li>
+ * <li>при поиске подходящих отрезков для точки реализуйте метод бинарного
+ * поиска для первого отрезка решения, а
+ * затем найдите оставшуюся часть решения (т.е. отрезков, подходящих для точки,
+ * может быть много)</li>
  * </ol>
  * <p>
  * Sample Input:<br/>
@@ -32,7 +42,6 @@ import java.util.Scanner;
  * 1 0 0<br/>
  * </p>
  */
-
 public class C_QSortOptimized {
     public static void main(String[] args) throws FileNotFoundException {
         var root = System.getProperty("user.dir") + "/src/";
@@ -47,23 +56,22 @@ public class C_QSortOptimized {
      * Тут реализуйте логику задачи с применением быстрой сортировки
      */
     int[] getAccessory2(InputStream stream) {
-        var scanner = new Scanner(stream);
-        var segments = new Segment[scanner.nextInt()];
-        var points = new int[scanner.nextInt()];
-        var result = new int[points.length];
-        for (var i = 0; i < segments.length; i++)
-            segments[i] = new Segment(scanner.nextInt(), scanner.nextInt());
-        for (var i = 0; i < points.length; i++)
-            points[i] = scanner.nextInt();
-        qsort(segments);
-        for (var i = 0; i < points.length; i++)
-            for (
-                    var j = find(segments, points[i]);
-                    j != -1 && j < segments.length && points[i] >= segments[j].start;
-                    j++
-            )
-                if (points[i] <= segments[j].stop) result[i]++;
-        return result;
+        try (var scanner = new Scanner(stream)) {
+            var segments = new Segment[scanner.nextInt()];
+            var points = new int[scanner.nextInt()];
+            var result = new int[points.length];
+            for (var i = 0; i < segments.length; i++)
+                segments[i] = new Segment(scanner.nextInt(), scanner.nextInt());
+            for (var i = 0; i < points.length; i++)
+                points[i] = scanner.nextInt();
+            qsort(segments);
+            for (var i = 0; i < points.length; i++)
+                for (var j = find(segments, points[i]); j != -1 && j < segments.length
+                        && points[i] >= segments[j].start; j++)
+                    if (points[i] <= segments[j].stop)
+                        result[i]++;
+            return result;
+        }
     }
 
     <T extends Comparable<T>> void qsort(T[] arr) {
@@ -71,7 +79,8 @@ public class C_QSortOptimized {
     }
 
     <T extends Comparable<T>> void qsort(T[] arr, int left, int right) {
-        if (left >= right) return;
+        if (left >= right)
+            return;
         var pivot = hoare(arr, left, right);
         qsort(arr, left, pivot - 1);
         qsort(arr, pivot + 1, right);
@@ -80,9 +89,12 @@ public class C_QSortOptimized {
     <T extends Comparable<T>> int hoare(T[] arr, int left, int right) {
         var pivot = arr[right];
         while (true) {
-            while (arr[left].compareTo(pivot) < 0) left++;
-            while (arr[right].compareTo(pivot) > 0) right--;
-            if (left >= right) return right;
+            while (arr[left].compareTo(pivot) < 0)
+                left++;
+            while (arr[right].compareTo(pivot) > 0)
+                right--;
+            if (left >= right)
+                return right;
             swap(arr, left, right);
         }
     }
@@ -91,7 +103,8 @@ public class C_QSortOptimized {
      * For arrays with repeats. Slower with example
      */
     <T extends Comparable<T>> void qsortrepeat(T[] arr, int left, int right) {
-        if (left >= right) return;
+        if (left >= right)
+            return;
         var pivot = repeats(arr, left, right);
         qsort(arr, left, pivot.getKey() - 1);
         qsort(arr, pivot.getValue() + 1, right);
@@ -128,10 +141,10 @@ public class C_QSortOptimized {
         return (left > right)
                 ? -1
                 : arr[mid].compareTo(target) < 0
-                ? find(arr, target, mid + 1, right)
-                : arr[mid].compareTo(target) > 0
-                ? find(arr, target, left, mid - 1)
-                : mid;
+                        ? find(arr, target, mid + 1, right)
+                        : arr[mid].compareTo(target) > 0
+                                ? find(arr, target, left, mid - 1)
+                                : mid;
     }
 
     /**
