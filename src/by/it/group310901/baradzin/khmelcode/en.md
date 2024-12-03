@@ -2,18 +2,26 @@
 
 ## Description
 
-In a distant land, a city named Mirrorcity was built. It was famous for its unique architecture: each house on one side of the river had an exact mirror reflection on the other bank. Tourists flocked here to admire this stunning symmetry.
+In a distant land, a city named Mirrorcity was built. It was famous for its
+unique architecture: each house on one side of the river had an exact mirror
+reflection on the other bank. Tourists flocked here to admire this stunning
+symmetry.
 
-But one day, disaster struck: a strong storm destroyed part of the city, and the mirror symmetry was disrupted. To restore the city to its former glory, it was necessary to determine which part of the city still remained mirror-symmetrical. The architects turned to you for help.
+But one day, disaster struck: a strong storm destroyed part of the city, and the
+mirror symmetry was disrupted. To restore the city to its former glory, it was
+necessary to determine which part of the city still remained mirror-symmetrical.
+The architects turned to you for help.
 
 ## Task
 
-You are given a tree of houses and need to find all subtrees where the types of houses are symmetrical. Subtrees that are subtrees of other found subtrees should not be included in the result.
+You are given a tree of houses and need to find all subtrees where the types of
+houses are symmetrical. Subtrees that are subtrees of other found subtrees
+should not be included in the result.
 
 Input:
 
-- The first line: an even number of addresses N.
-- The next N lines contain:
+- The first number: an even number of addresses N.
+- The next N separated by spaces pairs contain:
   - a three-digit address of a house;
   - a space (` `);
   - the type of the house as a single word.
@@ -22,8 +30,10 @@ Output:
 
 - A single-line array in the following format:
   - opening square bracket (`[`);
-  - three-digit addresses of results, listed in left-to-right breadth-first order:
-    - if there are multiple addresses, they should be separated by a comma and a space `, `;
+  - three-digit addresses of results, listed in left-to-right breadth-first
+    order:
+    - if there are multiple addresses, they should be separated by a comma and a
+      space `, `;
   - closing square bracket (`]`).
 
 ## Test Cases
@@ -40,13 +50,7 @@ Output:
 Input:
 
 ```text
-6
-000 A
-001 B
-100 B
-002 C
-200 C
-003 D
+6 000 A 001 B 100 B 002 C 200 C 003 D
 ```
 
 Output:
@@ -67,13 +71,7 @@ Output:
 Input:
 
 ```text
-6
-000 A
-001 B
-100 C
-002 D
-200 D
-003 E
+6 000 A 001 B 100 C 002 D 200 D 003 E
 ```
 
 Output:
@@ -91,10 +89,7 @@ Output:
 Input:
 
 ```text
-3
-100 House
-000 House
-001 Store
+3 100 House 000 House 001 Store
 ```
 
 Output:
@@ -116,14 +111,7 @@ Output:
 Input:
 
 ```text
-6
-000 X
-001 Y
-100 Y
-002 Z
-200 Z
-003 W
-300 W
+6 000 X 001 Y 100 Y 002 Z 200 Z 003 W 300 W
 ```
 
 Output:
@@ -146,15 +134,7 @@ Output:
 Input:
 
 ```text
-8
-000 P
-001 Q
-100 Q
-002 R
-200 R
-003 S
-300 S
-004 T
+8 000 P 001 Q 100 Q 002 R 200 R 003 S 300 S 004 T
 ```
 
 Output:
@@ -192,14 +172,7 @@ Output:
 Input:
 
 ```text
-7
-300 N
-003 N
-001 K
-000 M
-100 N
-200 M
-002 M
+7 300 N 003 N 001 K 000 M 100 N 200 M 002 M
 ```
 
 Output:
@@ -222,15 +195,7 @@ Output:
 Input:
 
 ```text
-8
-100 B
-000 A
-300 A
-002 A
-003 C
-001 B
-004 C
-200 A
+8 100 B 000 A 300 A 002 A 003 C 001 B 004 C 200 A
 ```
 
 Output:
@@ -249,11 +214,7 @@ Output:
 Input:
 
 ```text
-4
-300 N
-100 A
-000 A
-001 B
+4 300 N 100 A 000 A 001 B
 ```
 
 Output:
@@ -277,16 +238,7 @@ Output:
 Input:
 
 ```text
-10
-008 V
-004 V
-300 U
-003 U
-200 T
-002 T
-100 S
-001 S
-000 R
+10 008 V 004 V 300 U 003 U 200 T 002 T 100 S 001 S 000 R
 ```
 
 Output:
@@ -295,24 +247,26 @@ Output:
 [100, 200, 008]
 ```
 
-## Theory
+# Theory
 
-### Data Structures
+## Data Structures
 
-#### Trees
+### Trees
 
 A tree is a hierarchical data structure consisting of nodes where:
 
 - One node is the root.
-- Each node can have multiple children but only one parent (except for the root).
+- Each node can have multiple children but only one parent (except for the
+  root).
 
-It is commonly used for representing and processing data that has a hierarchical nature, such as a file system, family tree, or directory structure. It is often applied in search and sorting algorithms.
+It is commonly used for representing and processing data that has a hierarchical
+nature, such as a file system, family tree, or directory structure. It is often
+applied in search and sorting algorithms.
 
----
+#### Array-based Tree Representation
 
-##### Array-based Tree Representation
-
-In an array-based tree representation, each node is assigned an index, and the relationships between nodes are determined by mathematical formulas:
+In an array-based tree representation, each node is assigned an index, and the
+relationships between nodes are determined by mathematical formulas:
 
 - For a node with index \(i\):
   - Left child: \(2i + 1\).
@@ -327,7 +281,8 @@ For this task, a tree with two methods is required:
 
 2. **Search**:
    - Access to nodes is done directly via index.
-   - To check symmetry, the children and their properties can be easily determined.
+   - To check symmetry, the children and their properties can be easily
+     determined.
 
 Advantages:
 
@@ -335,11 +290,10 @@ Advantages:
 - Suitable if the tree is initially given in array form.
 - Suitable for this task since the number of elements is known in advance.
 
----
+#### Pointer-based Tree Representation
 
-##### Pointer-based Tree Representation
-
-In a pointer-based tree representation, each node contains links to its children:
+In a pointer-based tree representation, each node contains links to its
+children:
 
 - A node is represented as an object or structure with fields:
   - Node value.
@@ -349,7 +303,8 @@ In a pointer-based tree representation, each node contains links to its children
 For this task, a tree with two methods is required:
 
 1. **Insertion**
-   - Nodes are added through a recursive or iterative pass starting from the root.
+   - Nodes are added through a recursive or iterative pass starting from the
+     root.
    - New nodes are added to the first available free spot.
 
 2. **Search**
@@ -361,11 +316,9 @@ Advantages:
 - Suitable for trees with dynamic sizes.
 - Suitable for any task requiring trees.
 
----
+## Algorithm
 
-### Algorithm
-
-#### General Solution Algorithm
+### General Solution Algorithm
 
 1. Read the tree from the input.
 2. Construct it in one of the representations (array or pointers).
@@ -375,12 +328,11 @@ Advantages:
 4. Exclude nested subtrees (if required).
 5. Output the addresses of the roots of symmetrical subtrees.
 
----
-
-#### Option 1: Recursive Symmetry Check
+### Option 1: Recursive Symmetry Check
 
 - **Complexity**: \(O(N^2)\).
-- **Description**: For each node, we check if its subtree is symmetrical through recursion.
+- **Description**: For each node, we check if its subtree is symmetrical through
+  recursion.
 
 1. Traverse the tree in depth.
 2. For each node, call a function to check symmetry, which:
@@ -397,15 +349,14 @@ Disadvantages:
 
 - Low performance on large trees.
 
----
-
-#### Option 2: Dynamic Programming
+### Option 2: Dynamic Programming
 
 - **Complexity**: \(O(N)\).
 - **Description**: Use memoization to store the results of checks for reuse.
 
 1. Process the tree bottom-up.
-2. For each node, determine if its subtree is symmetrical based on the results from its children.
+2. For each node, determine if its subtree is symmetrical based on the results
+   from its children.
 3. If the node is symmetrical, record it.
 
 Advantages:
@@ -416,12 +367,11 @@ Disadvantages:
 
 - Complex to implement.
 
----
-
-#### Option 3: Iterative Tree Traversal (BFS)
+### Option 3: Iterative Tree Traversal (BFS)
 
 - **Complexity**: \(O(N \cdot H)\).
-- **Description**: Traverse the tree in breadth-first order using a queue to check symmetry.
+- **Description**: Traverse the tree in breadth-first order using a queue to
+  check symmetry.
 
 1. Add the root node to the queue.
 2. For each node:
@@ -438,9 +388,7 @@ Disadvantages:
 
 - Low performance on trees with large heights.
 
----
-
-#### Option 4: Hashing Subtrees
+### Option 4: Hashing Subtrees
 
 - **Complexity**: \(O(N)\).
 - **Description**: Represent each subtree as a string and hash it.
@@ -459,15 +407,14 @@ Disadvantages:
 
 - Requires extra memory for storing hashes.
 
----
-
-#### Option 5: Unique Identifiers
+### Option 5: Unique Identifiers
 
 - **Complexity**: \(O(N \cdot H)\).
 - **Description**: Use unique identifiers to check symmetry.
 
 1. Assign a unique identifier to each node.
-2. For each node, check if the sequences of identifiers for mirrored subtrees match.
+2. For each node, check if the sequences of identifiers for mirrored subtrees
+   match.
 3. If the identifiers match, the node is symmetrical.
 
 Advantages:
@@ -478,9 +425,7 @@ Disadvantages:
 
 - Increased memory usage.
 
----
-
-### Conclusion
+## Conclusion
 
 For the task of checking symmetry of subtrees, the most suitable methods are:
 
